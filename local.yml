@@ -11,3 +11,21 @@
           - tmux
           - vim
 
+- name: copy wallpaper file
+  copy:
+    src: files/wallpaper.jpeg
+    dest: /usr/share/backgrounds/ansible-wallpaper.jpeg
+    owner: root
+    group: root
+
+- name: set wallpaper
+  become_user: eshearer
+  dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///usr/share/backgrounds/ansible-wallpaper.png'"
+
+- name: set wallpaper postion
+  become_user: eshearer
+  dconf:
+    key: "/org/gnome/desktop/background/picture-options"
+    value: "'zoom'"
