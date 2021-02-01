@@ -22,7 +22,7 @@
       become_user: eshearer
       dconf:
         key: "/org/gnome/desktop/background/picture-uri"
-        value: "'file:///usr/share/backgrounds/ansible-wallpaper.png'"
+        value: "'file:///usr/share/backgrounds/ansible-wallpaper.jpg'"
     
     - name: set wallpaper postion
       become_user: eshearer
