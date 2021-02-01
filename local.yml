@@ -17,7 +17,6 @@
         dest: /usr/share/backgrounds/ansible-wallpaper.jpg
         owner: root
         group: root
-        mode: 0644
     
     - name: set wallpaper
       become_user: eshearer
