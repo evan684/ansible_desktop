@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+
+function checkForRoot() {
+    if [[ $(id -u) != 0 ]]; then
+        echo "Please run this script as an sudo." 
+        exit 1
+    fi
+}
+
+function os_check() {
+    os_list="Ubuntu"
+    echo "Checking for comptiable OS."
+    if ( uname - a |grep ubuntu ); then
+        echo ""
+        echo "OS is compatiable."
+    else
+        echo "This script is designed to be on the following OS's only:${os_list}."
+    fi
+}
+
+function pre_ansible_actions() {
+    /usr/bin/apt update
+    /usr/bin/apt upgrade
+    /usr/bin/apt install git
+    /usr/bin/apt install ansible
+}
+
+
+
+checkForRoot
+os_check
+pre_ansible_actions
+
+
+/usr/bin/ansible-pull -U https://github.com/evan684/ansible_desktop.git
+
+
