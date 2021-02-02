@@ -10,6 +10,7 @@
           - htop
           - tmux
           - vim
+          - python3-psutil
     
     - name: copy wallpaper file
       copy:
@@ -29,3 +30,27 @@
       dconf:
         key: "/org/gnome/desktop/background/picture-options"
         value: "'zoom'"
+
+
+    - name: install cron job (ansible-pull)
+      cron: user="ansible" name="ansible provision" minute="*/15" job="/usr/bin/ansible-pull -o -U https://github.com/<github_user>/ansible.git > /dev/null"
+    
+    - name: add ansible user
+      user:
+        name: ansible
+        system: yes
+
+    - name: set up sudo for ansible user
+      copy:
+        src: files/sudoer_ansible
+        dest: /etc/sudoers.d/ansible
+        owner: root
+        group: root
+        mode: 0440
+
+    - name: add ansible-pull cron job
+      cron:
+        name: ansible auto-provision
+        user: velociraptor
+        minute: "*/15"
+        job: /usr/bin/ansible-pull -o -U https://github.com/evan684/ansible_desktop.git
