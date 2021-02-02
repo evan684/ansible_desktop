@@ -1,7 +1,6 @@
 #!/bin/bash
 
 
-
 function checkForRoot() {
     if [[ $(id -u) != 0 ]]; then
         echo "Please run this script as an sudo." 
@@ -12,7 +11,7 @@ function checkForRoot() {
 function os_check() {
     os_list="Ubuntu"
     echo "Checking for comptiable OS."
-    if ( uname - a |grep ubuntu ); then
+    if ( uname -a |grep ubuntu ); then
         echo ""
         echo "OS is compatiable."
     else
@@ -21,10 +20,10 @@ function os_check() {
 }
 
 function pre_ansible_actions() {
-    /usr/bin/apt update
-    /usr/bin/apt upgrade
-    /usr/bin/apt install git
-    /usr/bin/apt install ansible
+    /usr/bin/apt update -y
+    /usr/bin/apt upgrade -y
+    /usr/bin/apt install git -y
+    /usr/bin/apt install ansible -y
 }
 
 
